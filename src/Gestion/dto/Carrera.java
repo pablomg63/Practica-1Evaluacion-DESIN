@@ -78,13 +78,17 @@ public class Carrera {
     
      public String[] toArrayString()
     {
-        String[] s = new String[4];
+        String[] s = new String[5];
         s[0] = nombre;
         s[1] = lugar;
         s[2] = fechaCarrera.toString();
         s[3] = String.valueOf(numPart);
-        //s[4] = String.valueOf(dorsal);
+        s[4] = String.valueOf(dorsal);
         return s;
+    }
+     
+    public void AñadirCorredor(Corredor corredor){
+        listaCorredores.add(corredor);
     }
 
     @Override

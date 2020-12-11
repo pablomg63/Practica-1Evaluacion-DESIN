@@ -29,20 +29,20 @@ public class DialogoCorredor extends javax.swing.JDialog {
     private void initComponents() {
 
         jLabelNombre = new javax.swing.JLabel();
-        jLabel2 = new javax.swing.JLabel();
+        jLabelDNI = new javax.swing.JLabel();
         jSpinnerFechaNac = new javax.swing.JSpinner();
         jLabelFechaNac = new javax.swing.JLabel();
         jLabelDireccion = new javax.swing.JLabel();
         jTextFieldDireccion = new javax.swing.JTextField();
         jTextFieldDNI = new javax.swing.JTextField();
         jTextFieldNombre = new javax.swing.JTextField();
-        jButton1 = new javax.swing.JButton();
+        jButtonAlta = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         jLabelNombre.setText("Nombre:");
 
-        jLabel2.setText("DNI:");
+        jLabelDNI.setText("DNI:");
 
         jSpinnerFechaNac.setModel(new javax.swing.SpinnerDateModel(new java.util.Date(946724760000L), null, new java.util.Date(), java.util.Calendar.DAY_OF_MONTH));
 
@@ -50,7 +50,7 @@ public class DialogoCorredor extends javax.swing.JDialog {
 
         jLabelDireccion.setText("Direccion:");
 
-        jButton1.setText("Alta...");
+        jButtonAlta.setText("Alta...");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -72,14 +72,14 @@ public class DialogoCorredor extends javax.swing.JDialog {
                             .addGroup(layout.createSequentialGroup()
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                     .addComponent(jLabelNombre, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                    .addComponent(jLabelDNI, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(jTextFieldDNI)
                                     .addComponent(jTextFieldNombre, javax.swing.GroupLayout.Alignment.TRAILING)))))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jButton1)))
+                        .addComponent(jButtonAlta)))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -91,7 +91,7 @@ public class DialogoCorredor extends javax.swing.JDialog {
                     .addComponent(jTextFieldNombre, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel2)
+                    .addComponent(jLabelDNI)
                     .addComponent(jTextFieldDNI, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -102,7 +102,7 @@ public class DialogoCorredor extends javax.swing.JDialog {
                     .addComponent(jLabelDireccion)
                     .addComponent(jTextFieldDireccion, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 43, Short.MAX_VALUE)
-                .addComponent(jButton1)
+                .addComponent(jButtonAlta)
                 .addGap(35, 35, 35))
         );
 
@@ -114,8 +114,8 @@ public class DialogoCorredor extends javax.swing.JDialog {
      */
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
-    private javax.swing.JLabel jLabel2;
+    private javax.swing.JButton jButtonAlta;
+    private javax.swing.JLabel jLabelDNI;
     private javax.swing.JLabel jLabelDireccion;
     private javax.swing.JLabel jLabelFechaNac;
     private javax.swing.JLabel jLabelNombre;

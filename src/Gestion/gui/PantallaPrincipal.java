@@ -6,6 +6,7 @@
 package Gestion.gui;
 
 import Gestion.dto.Carrera;
+import Gestion.dto.Corredor;
 import Gestion.dto.Gestor;
 import java.util.ArrayList;
 import javax.swing.table.DefaultTableModel;
@@ -35,17 +36,21 @@ public class PantallaPrincipal extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jScrollPane1 = new javax.swing.JScrollPane();
+        TituloCarrera = new javax.swing.JLabel();
+        jScrollPaneCarrera = new javax.swing.JScrollPane();
         jTableCarreras = new javax.swing.JTable();
-        jButton1 = new javax.swing.JButton();
-        jScrollPane2 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
-        jMenuBar1 = new javax.swing.JMenuBar();
+        TituloCorredor = new javax.swing.JLabel();
+        jScrollPaneCorredor = new javax.swing.JScrollPane();
+        jTableCorredores = new javax.swing.JTable();
+        jButtonBaja = new javax.swing.JButton();
+        jMenuBar = new javax.swing.JMenuBar();
         jMenuAlta = new javax.swing.JMenu();
         jMenuItemCarrera = new javax.swing.JMenuItem();
         jMenuItemCorredor = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+
+        TituloCarrera.setText("CARRERAS");
 
         jTableCarreras.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -55,25 +60,32 @@ public class PantallaPrincipal extends javax.swing.JFrame {
                 {null, null, null, null}
             },
             new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
+                "Nombre", "Lugar", "Fecha", "Participantes"
             }
         ));
-        jScrollPane1.setViewportView(jTableCarreras);
+        jTableCarreras.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jTableCarrerasMouseClicked(evt);
+            }
+        });
+        jScrollPaneCarrera.setViewportView(jTableCarreras);
 
-        jButton1.setText("jButton1");
+        TituloCorredor.setText("CORREDORES");
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        jTableCorredores.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null}
             },
             new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
+                "Nombre", "Direccion", "Fecha Nac", "Telefono", "DNI"
             }
         ));
-        jScrollPane2.setViewportView(jTable1);
+        jScrollPaneCorredor.setViewportView(jTableCorredores);
+
+        jButtonBaja.setText("Dar de Baja");
 
         jMenuAlta.setText("Alta...");
 
@@ -88,30 +100,42 @@ public class PantallaPrincipal extends javax.swing.JFrame {
         jMenuItemCorredor.setText("Corredor");
         jMenuAlta.add(jMenuItemCorredor);
 
-        jMenuBar1.add(jMenuAlta);
+        jMenuBar.add(jMenuAlta);
 
-        setJMenuBar(jMenuBar1);
+        setJMenuBar(jMenuBar);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 400, Short.MAX_VALUE)
+            .addComponent(jScrollPaneCarrera, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 400, Short.MAX_VALUE)
+            .addComponent(jScrollPaneCorredor, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jButton1)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jButtonBaja))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(169, 169, 169)
+                        .addComponent(TituloCorredor))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(162, 162, 162)
+                        .addComponent(TituloCarrera)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 162, Short.MAX_VALUE)
+                .addComponent(TituloCarrera)
+                .addGap(22, 22, 22)
+                .addComponent(jScrollPaneCarrera, javax.swing.GroupLayout.PREFERRED_SIZE, 229, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 213, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jButton1)
-                .addContainerGap())
+                .addComponent(TituloCorredor)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 33, Short.MAX_VALUE)
+                .addComponent(jScrollPaneCorredor, javax.swing.GroupLayout.PREFERRED_SIZE, 213, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jButtonBaja)
+                .addGap(6, 6, 6))
         );
 
         pack();
@@ -122,11 +146,22 @@ public class PantallaPrincipal extends javax.swing.JFrame {
         carrera.setVisible(true);
         mostrarCarreras();
     }//GEN-LAST:event_jMenuItemCarreraActionPerformed
+
+    
+    private void jTableCarrerasMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTableCarrerasMouseClicked
+        // TODO add your handling code here:
+        int fila= jTableCarreras.getSelectedRow();
+        if (fila!=-1) {
+            String nombreCarrera = String.valueOf(jTableCarreras.getValueAt(fila, 0));
+            mostrarCorredores(nombreCarrera);
+            System.out.println("Carrera"+nombreCarrera);
+        }
+    }//GEN-LAST:event_jTableCarrerasMouseClicked
     
      private void inicializarTablaCarreras()
     {
         DefaultTableModel dtm = new DefaultTableModel();
-        dtm.setColumnIdentifiers(new String[]{"Nombre","Fecha","Lugar","Participantes"});
+        dtm.setColumnIdentifiers(new String[]{"Nombre","Lugar","Fecha","Participantes"});
         jTableCarreras.setModel(dtm);
     }
     
@@ -138,6 +173,22 @@ public class PantallaPrincipal extends javax.swing.JFrame {
          }
          
      }
+     private void inicializarTablaCorredor(){
+        DefaultTableModel dtm = new DefaultTableModel();
+        dtm.setColumnIdentifiers(new String[]{"Nombre","Direccion","Fecha Nac","Telefono","DNI"});
+        jTableCorredores.setModel(dtm);
+    }
+     
+        
+    private void mostrarCorredores(String nombreCarrera){
+        Carrera carrera = gestor.BuscarCarrera(nombreCarrera);
+        ArrayList<Corredor> listaCorredores= carrera.getListaCorredores();
+        DefaultTableModel dtm = (DefaultTableModel)jTableCorredores.getModel();
+        for (int i = 0; i < listaCorredores.size(); i++) {
+           dtm.addRow(listaCorredores.get(i).toArrayString());
+        } 
+    }
+
      
     /**
      * @param args the command line arguments
@@ -175,14 +226,16 @@ public class PantallaPrincipal extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
+    private javax.swing.JLabel TituloCarrera;
+    private javax.swing.JLabel TituloCorredor;
+    private javax.swing.JButton jButtonBaja;
     private javax.swing.JMenu jMenuAlta;
-    private javax.swing.JMenuBar jMenuBar1;
+    private javax.swing.JMenuBar jMenuBar;
     private javax.swing.JMenuItem jMenuItemCarrera;
     private javax.swing.JMenuItem jMenuItemCorredor;
-    private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JTable jTable1;
+    private javax.swing.JScrollPane jScrollPaneCarrera;
+    private javax.swing.JScrollPane jScrollPaneCorredor;
     private javax.swing.JTable jTableCarreras;
+    private javax.swing.JTable jTableCorredores;
     // End of variables declaration//GEN-END:variables
 }

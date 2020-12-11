@@ -49,8 +49,33 @@ public class Gestor {
             }
         }
     }
-    
-    public void AsociarCorredor(String nombre, String dni){
-        
+    public Corredor BuscarCorredor(String dni){
+        for (int i = 0; i < listaCorredor.size(); i++) {
+            if(listaCorredor.get(i).getDni().equals(dni)){
+                return listaCorredor.get(i);
+            }
+        }
+        return null;
+    }
+    public Carrera BuscarCarrera(String nombreCarrera){
+        for (int i = 0; i < listaCarrera.size(); i++) {
+           if( listaCarrera.get(i).getNombre().equals(nombreCarrera)){
+               return listaCarrera.get(i);
+           }
+        }
+        return null;
+    }
+    public ArrayList<Corredor> CorredoresCarreras(String nombreCarrera){
+        for (int i = 0; i < listaCarrera.size(); i++) {
+            if (listaCarrera.get(i).getNombre().equals(nombreCarrera)) {
+                return listaCarrera.get(i).getListaCorredores();
+            }
+        }
+        return null;
+    }
+    public void AñadirCorredorCarrera(String nombreCarrera, String dni){
+        Carrera carrera = BuscarCarrera(nombreCarrera);
+        Corredor corredor = BuscarCorredor(dni);
+        carrera.AñadirCorredor(corredor);
     }
 }

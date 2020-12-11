@@ -40,7 +40,7 @@ public class JDialogCarrera extends javax.swing.JDialog {
         jComboBoxLugar = new javax.swing.JComboBox<>();
         jLabelFechaNac1 = new javax.swing.JLabel();
         jSpinnerParticipantes = new javax.swing.JSpinner();
-        jButton1 = new javax.swing.JButton();
+        jButtonAlta = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -56,10 +56,10 @@ public class JDialogCarrera extends javax.swing.JDialog {
 
         jLabelFechaNac1.setText("Participantes:");
 
-        jButton1.setText("Alta...");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        jButtonAlta.setText("Alta...");
+        jButtonAlta.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                jButtonAltaActionPerformed(evt);
             }
         });
 
@@ -91,7 +91,7 @@ public class JDialogCarrera extends javax.swing.JDialog {
                                 .addComponent(jSpinnerParticipantes, javax.swing.GroupLayout.PREFERRED_SIZE, 304, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(layout.createSequentialGroup()
                                 .addGap(0, 0, Short.MAX_VALUE)
-                                .addComponent(jButton1)))))
+                                .addComponent(jButtonAlta)))))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -114,28 +114,28 @@ public class JDialogCarrera extends javax.swing.JDialog {
                     .addComponent(jLabelFechaNac1)
                     .addComponent(jSpinnerParticipantes, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(58, 58, 58)
-                .addComponent(jButton1)
+                .addComponent(jButtonAlta)
                 .addContainerGap())
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void jButtonAltaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAltaActionPerformed
         String nombre = jTextFieldNombre.getText();
         Date fechaCarrera = (Date) jSpinnerFechaCarr.getValue();
         String lugar = (String)jComboBoxLugar.getSelectedItem();
         int participantes= Integer.parseInt(jSpinnerParticipantes.getValue()+"");
         gestor.DarAltaCarrera(nombre, fechaCarrera, lugar, participantes, 0);
         
-    }//GEN-LAST:event_jButton1ActionPerformed
+    }//GEN-LAST:event_jButtonAltaActionPerformed
 
     /**
      * @param args the command line arguments
      */
    
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButtonAlta;
     private javax.swing.JComboBox<String> jComboBoxLugar;
     private javax.swing.JLabel jLabelFechaCarr;
     private javax.swing.JLabel jLabelFechaNac1;
