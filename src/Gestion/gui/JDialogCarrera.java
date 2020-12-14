@@ -127,6 +127,7 @@ public class JDialogCarrera extends javax.swing.JDialog {
         String lugar = (String)jComboBoxLugar.getSelectedItem();
         int participantes= Integer.parseInt(jSpinnerParticipantes.getValue()+"");
         gestor.DarAltaCarrera(nombre, fechaCarrera, lugar, participantes, 0);
+        setVisible(false);
         
     }//GEN-LAST:event_jButtonAltaActionPerformed
 

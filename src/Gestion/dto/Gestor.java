@@ -19,9 +19,14 @@ public class Gestor {
     public ArrayList<Carrera> getListaCarrera() {
         return listaCarrera;
     }
+
+    public ArrayList<Corredor> getListaCorredor() {
+        return listaCorredor;
+    }
+    
     
     public void DarAltaCarrera(String nombre, Date fechaCarrera, String lugar, int numPart, int dorsal){
-        Carrera carrera= new Carrera(fechaCarrera, lugar, numPart, dorsal);
+        Carrera carrera= new Carrera(nombre, fechaCarrera, lugar, numPart, dorsal);
         listaCarrera.add(carrera);
     }
     

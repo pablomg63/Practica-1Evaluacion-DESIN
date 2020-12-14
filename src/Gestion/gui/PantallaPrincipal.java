@@ -24,7 +24,11 @@ public class PantallaPrincipal extends javax.swing.JFrame {
         gestor= new Gestor();
         initComponents();
         inicializarTablaCarreras();
+        inicializarTablaCorredorTotales();
+        inicializarTablaCorredor();
         mostrarCarreras();
+        mostrarCorredoresTotales();
+        //mostrarCorredores();
     }
 
     /**
@@ -42,7 +46,13 @@ public class PantallaPrincipal extends javax.swing.JFrame {
         TituloCorredor = new javax.swing.JLabel();
         jScrollPaneCorredor = new javax.swing.JScrollPane();
         jTableCorredores = new javax.swing.JTable();
-        jButtonBaja = new javax.swing.JButton();
+        jButtonBajaCarrera = new javax.swing.JButton();
+        TituloCorredor1 = new javax.swing.JLabel();
+        jScrollPaneCorredorTot = new javax.swing.JScrollPane();
+        jTableCorredoresTot = new javax.swing.JTable();
+        jButtonAñadir = new javax.swing.JButton();
+        filler1 = new javax.swing.Box.Filler(new java.awt.Dimension(0, 0), new java.awt.Dimension(0, 0), new java.awt.Dimension(32767, 0));
+        jButtonBajaCorredor = new javax.swing.JButton();
         jMenuBar = new javax.swing.JMenuBar();
         jMenuAlta = new javax.swing.JMenu();
         jMenuItemCarrera = new javax.swing.JMenuItem();
@@ -85,7 +95,41 @@ public class PantallaPrincipal extends javax.swing.JFrame {
         ));
         jScrollPaneCorredor.setViewportView(jTableCorredores);
 
-        jButtonBaja.setText("Dar de Baja");
+        jButtonBajaCarrera.setText("Dar de Baja");
+        jButtonBajaCarrera.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonBajaCarreraActionPerformed(evt);
+            }
+        });
+
+        TituloCorredor1.setText("CORREDORES TOTALES");
+
+        jTableCorredoresTot.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null}
+            },
+            new String [] {
+                "Nombre", "Direccion", "Fecha Nac", "Telefono", "DNI"
+            }
+        ));
+        jScrollPaneCorredorTot.setViewportView(jTableCorredoresTot);
+
+        jButtonAñadir.setText("Añadir Corredor a Carrera");
+        jButtonAñadir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonAñadirActionPerformed(evt);
+            }
+        });
+
+        jButtonBajaCorredor.setText("Dar de Baja");
+        jButtonBajaCorredor.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonBajaCorredorActionPerformed(evt);
+            }
+        });
 
         jMenuAlta.setText("Alta...");
 
@@ -98,6 +142,11 @@ public class PantallaPrincipal extends javax.swing.JFrame {
         jMenuAlta.add(jMenuItemCarrera);
 
         jMenuItemCorredor.setText("Corredor");
+        jMenuItemCorredor.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItemCorredorActionPerformed(evt);
+            }
+        });
         jMenuAlta.add(jMenuItemCorredor);
 
         jMenuBar.add(jMenuAlta);
@@ -108,34 +157,67 @@ public class PantallaPrincipal extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPaneCarrera, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 400, Short.MAX_VALUE)
-            .addComponent(jScrollPaneCorredor, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jScrollPaneCarrera, javax.swing.GroupLayout.PREFERRED_SIZE, 416, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jScrollPaneCorredor, javax.swing.GroupLayout.PREFERRED_SIZE, 416, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(layout.createSequentialGroup()
                         .addContainerGap()
-                        .addComponent(jButtonBaja))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(169, 169, 169)
-                        .addComponent(TituloCorredor))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(162, 162, 162)
-                        .addComponent(TituloCarrera)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(TituloCarrera)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addGap(312, 312, 312)
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(filler1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addComponent(jButtonBajaCarrera))))
+                                .addGap(0, 0, Short.MAX_VALUE))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(TituloCorredor)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 28, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addComponent(jScrollPaneCorredorTot, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 411, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGroup(layout.createSequentialGroup()
+                            .addComponent(TituloCorredor1, javax.swing.GroupLayout.PREFERRED_SIZE, 211, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jButtonBajaCorredor)
+                            .addContainerGap()))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(jButtonAñadir)
+                        .addContainerGap())))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addComponent(TituloCarrera)
-                .addGap(22, 22, 22)
-                .addComponent(jScrollPaneCarrera, javax.swing.GroupLayout.PREFERRED_SIZE, 229, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(12, 12, 12)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(TituloCarrera)
+                    .addComponent(jButtonBajaCarrera))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jScrollPaneCarrera, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 229, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(filler1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 28, Short.MAX_VALUE)
                 .addComponent(TituloCorredor)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 33, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPaneCorredor, javax.swing.GroupLayout.PREFERRED_SIZE, 213, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jButtonBaja)
-                .addGap(6, 6, 6))
+                .addGap(40, 40, 40))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addGap(147, 147, 147)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jButtonBajaCorredor)
+                    .addComponent(TituloCorredor1, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addComponent(jScrollPaneCorredorTot, javax.swing.GroupLayout.PREFERRED_SIZE, 213, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jButtonAñadir)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pack();
@@ -157,6 +239,41 @@ public class PantallaPrincipal extends javax.swing.JFrame {
             System.out.println("Carrera"+nombreCarrera);
         }
     }//GEN-LAST:event_jTableCarrerasMouseClicked
+
+    private void jButtonBajaCarreraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonBajaCarreraActionPerformed
+        
+    }//GEN-LAST:event_jButtonBajaCarreraActionPerformed
+
+    private void jMenuItemCorredorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemCorredorActionPerformed
+        DialogoCorredor corredor= new DialogoCorredor(this, true, gestor);
+        corredor.setVisible(true);
+        mostrarCorredoresTotales();
+    }//GEN-LAST:event_jMenuItemCorredorActionPerformed
+
+    private void jButtonAñadirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAñadirActionPerformed
+        // TODO add your handling code here:
+        boolean correcto=false;
+        String nombreCarrera="";
+        int filacarrera= jTableCarreras.getSelectedRow();
+        if (filacarrera!=-1) {
+             nombreCarrera = String.valueOf(jTableCarreras.getValueAt(filacarrera, 0));
+            correcto=true;
+        }
+         
+        int filacorredor= jTableCorredoresTot.getSelectedRow();
+        if (filacorredor!=-1) {
+            String dni = String.valueOf(jTableCorredoresTot.getValueAt(filacorredor, 0));
+            if(correcto)
+            {
+                gestor.AñadirCorredorCarrera(nombreCarrera, dni);
+            }
+        }
+        mostrarCorredores(nombreCarrera);
+    }//GEN-LAST:event_jButtonAñadirActionPerformed
+
+    private void jButtonBajaCorredorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonBajaCorredorActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButtonBajaCorredorActionPerformed
     
      private void inicializarTablaCarreras()
     {
@@ -173,13 +290,27 @@ public class PantallaPrincipal extends javax.swing.JFrame {
          }
          
      }
-     private void inicializarTablaCorredor(){
+     
+     private void inicializarTablaCorredorTotales(){
+        DefaultTableModel dtm = new DefaultTableModel();
+        dtm.setColumnIdentifiers(new String[]{"Nombre","Direccion","Fecha Nac","Telefono","DNI"});
+        jTableCorredoresTot.setModel(dtm);
+    }
+     
+    private void mostrarCorredoresTotales(){
+        ArrayList<Corredor> listaCorredores=gestor.getListaCorredor();
+        DefaultTableModel dtm = (DefaultTableModel)jTableCorredoresTot.getModel();
+        for (int i = 0; i < listaCorredores.size(); i++) {
+           dtm.addRow(listaCorredores.get(i).toArrayString());
+        } 
+    }
+    
+    private void inicializarTablaCorredor(){
         DefaultTableModel dtm = new DefaultTableModel();
         dtm.setColumnIdentifiers(new String[]{"Nombre","Direccion","Fecha Nac","Telefono","DNI"});
         jTableCorredores.setModel(dtm);
     }
-     
-        
+         
     private void mostrarCorredores(String nombreCarrera){
         Carrera carrera = gestor.BuscarCarrera(nombreCarrera);
         ArrayList<Corredor> listaCorredores= carrera.getListaCorredores();
@@ -228,14 +359,20 @@ public class PantallaPrincipal extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel TituloCarrera;
     private javax.swing.JLabel TituloCorredor;
-    private javax.swing.JButton jButtonBaja;
+    private javax.swing.JLabel TituloCorredor1;
+    private javax.swing.Box.Filler filler1;
+    private javax.swing.JButton jButtonAñadir;
+    private javax.swing.JButton jButtonBajaCarrera;
+    private javax.swing.JButton jButtonBajaCorredor;
     private javax.swing.JMenu jMenuAlta;
     private javax.swing.JMenuBar jMenuBar;
     private javax.swing.JMenuItem jMenuItemCarrera;
     private javax.swing.JMenuItem jMenuItemCorredor;
     private javax.swing.JScrollPane jScrollPaneCarrera;
     private javax.swing.JScrollPane jScrollPaneCorredor;
+    private javax.swing.JScrollPane jScrollPaneCorredorTot;
     private javax.swing.JTable jTableCarreras;
     private javax.swing.JTable jTableCorredores;
+    private javax.swing.JTable jTableCorredoresTot;
     // End of variables declaration//GEN-END:variables
 }

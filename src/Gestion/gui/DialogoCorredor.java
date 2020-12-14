@@ -5,17 +5,22 @@
  */
 package Gestion.gui;
 
+import Gestion.dto.Gestor;
+import java.util.Date;
+
 /**
  *
  * @author PABLO
  */
 public class DialogoCorredor extends javax.swing.JDialog {
+     private Gestor gestor= null;
 
     /**
      * Creates new form DialogoAltaCorredor
      */
-    public DialogoCorredor(java.awt.Frame parent, boolean modal) {
+    public DialogoCorredor(java.awt.Frame parent, boolean modal, Gestor gestor) {
         super(parent, modal);
+        this.gestor=gestor;
         initComponents();
     }
 
@@ -37,6 +42,8 @@ public class DialogoCorredor extends javax.swing.JDialog {
         jTextFieldDNI = new javax.swing.JTextField();
         jTextFieldNombre = new javax.swing.JTextField();
         jButtonAlta = new javax.swing.JButton();
+        jLabelTelefono = new javax.swing.JLabel();
+        jTextFieldTelefono = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -44,48 +51,57 @@ public class DialogoCorredor extends javax.swing.JDialog {
 
         jLabelDNI.setText("DNI:");
 
-        jSpinnerFechaNac.setModel(new javax.swing.SpinnerDateModel(new java.util.Date(946724760000L), null, new java.util.Date(), java.util.Calendar.DAY_OF_MONTH));
+        jSpinnerFechaNac.setModel(new javax.swing.SpinnerDateModel(new java.util.Date(946724760000L), null, new java.util.Date(), java.util.Calendar.DAY_OF_YEAR));
 
         jLabelFechaNac.setText("Fecha Nacimiento");
 
         jLabelDireccion.setText("Direccion:");
 
         jButtonAlta.setText("Alta...");
+        jButtonAlta.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonAltaActionPerformed(evt);
+            }
+        });
+
+        jLabelTelefono.setText("Telefono");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
             .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(34, 34, 34)
+                        .addGap(0, 317, Short.MAX_VALUE)
+                        .addComponent(jButtonAlta))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jLabelFechaNac)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jSpinnerFechaNac, javax.swing.GroupLayout.DEFAULT_SIZE, 292, Short.MAX_VALUE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jLabelDireccion)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jTextFieldDireccion))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(jLabelNombre, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jLabelDNI, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jLabelFechaNac)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jSpinnerFechaNac, javax.swing.GroupLayout.DEFAULT_SIZE, 268, Short.MAX_VALUE))
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jLabelDireccion)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jTextFieldDireccion))
-                            .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(jLabelNombre, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(jLabelDNI, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jTextFieldDNI)
-                                    .addComponent(jTextFieldNombre, javax.swing.GroupLayout.Alignment.TRAILING)))))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jButtonAlta)))
+                            .addComponent(jTextFieldDNI)
+                            .addComponent(jTextFieldNombre, javax.swing.GroupLayout.Alignment.TRAILING)))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jLabelTelefono)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jTextFieldTelefono)))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(44, 44, 44)
+                .addGap(23, 23, 23)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabelNombre)
                     .addComponent(jTextFieldNombre, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -101,13 +117,28 @@ public class DialogoCorredor extends javax.swing.JDialog {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabelDireccion)
                     .addComponent(jTextFieldDireccion, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 43, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 19, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jTextFieldTelefono, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabelTelefono))
+                .addGap(42, 42, 42)
                 .addComponent(jButtonAlta)
-                .addGap(35, 35, 35))
+                .addContainerGap())
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void jButtonAltaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAltaActionPerformed
+        // TODO add your handling code here:
+        String nombre= jTextFieldNombre.getText();
+        String direccion= jTextFieldDireccion.getText();
+        Date fechaNac= (Date) jSpinnerFechaNac.getValue();
+        String telefono= jTextFieldTelefono.getText();
+        String dni = jTextFieldDNI.getText();
+        gestor.DarAltaCorredor(nombre, dni, fechaNac, direccion, telefono);
+        setVisible(false);
+    }//GEN-LAST:event_jButtonAltaActionPerformed
 
     /**
      * @param args the command line arguments
@@ -119,9 +150,11 @@ public class DialogoCorredor extends javax.swing.JDialog {
     private javax.swing.JLabel jLabelDireccion;
     private javax.swing.JLabel jLabelFechaNac;
     private javax.swing.JLabel jLabelNombre;
+    private javax.swing.JLabel jLabelTelefono;
     private javax.swing.JSpinner jSpinnerFechaNac;
     private javax.swing.JTextField jTextFieldDNI;
     private javax.swing.JTextField jTextFieldDireccion;
     private javax.swing.JTextField jTextFieldNombre;
+    private javax.swing.JTextField jTextFieldTelefono;
     // End of variables declaration//GEN-END:variables
 }

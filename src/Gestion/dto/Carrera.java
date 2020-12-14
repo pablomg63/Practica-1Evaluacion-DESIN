@@ -21,7 +21,8 @@ public class Carrera {
     ArrayList<Corredor>listaCorredores= new ArrayList<>();
     ArrayList<Corredor>llegada= new ArrayList<>();
 
-    public Carrera(Date fechaCarrera, String lugar, int numPart, int dorsal) {
+    public Carrera(String nombre, Date fechaCarrera, String lugar, int numPart, int dorsal) {
+        this.nombre = nombre;
         this.fechaCarrera = fechaCarrera;
         this.lugar = lugar;
         this.numPart = numPart;
@@ -78,12 +79,12 @@ public class Carrera {
     
      public String[] toArrayString()
     {
-        String[] s = new String[5];
+        String[] s = new String[4];
         s[0] = nombre;
         s[1] = lugar;
         s[2] = fechaCarrera.toString();
         s[3] = String.valueOf(numPart);
-        s[4] = String.valueOf(dorsal);
+        //s[4] = String.valueOf(dorsal);
         return s;
     }
      
