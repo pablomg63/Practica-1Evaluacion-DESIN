@@ -13,13 +13,13 @@ import java.util.Date;
  * @author PABLO
  */
 public class Carrera {
-    String nombre;
-    Date fechaCarrera;
-    String lugar;
-    int numPart;
-    int dorsal;
-    ArrayList<Corredor>listaCorredores= new ArrayList<>();
-    ArrayList<Corredor>llegada= new ArrayList<>();
+    private String nombre;
+    private Date fechaCarrera;
+    private String lugar;
+    private int numPart;
+    private int dorsal;
+    private ArrayList<Corredor>listaCorredores= new ArrayList<>();
+    private ArrayList<Corredor>llegada= new ArrayList<>();
 
     public Carrera(String nombre, Date fechaCarrera, String lugar, int numPart, int dorsal) {
         this.nombre = nombre;
@@ -89,7 +89,17 @@ public class Carrera {
     }
      
     public void AñadirCorredor(Corredor corredor){
-        listaCorredores.add(corredor);
+        dorsal++;
+        corredor.setDorsalCarrera(dorsal);
+       listaCorredores.add(corredor); 
+    }
+    
+    public void BorrarCorredor(String dni){
+        for (int i = 0; i < listaCorredores.size(); i++) {
+            if(listaCorredores.get(i).getDni().equals(dni)){
+                listaCorredores.remove(i);
+            }
+        }
     }
 
     @Override

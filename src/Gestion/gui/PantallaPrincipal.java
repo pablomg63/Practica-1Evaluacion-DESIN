@@ -6,6 +6,7 @@
 package Gestion.gui;
 
 import Gestion.dto.Carrera;
+import Gestion.dto.ComponenteTemporizador;
 import Gestion.dto.Corredor;
 import Gestion.dto.Gestor;
 import java.util.ArrayList;
@@ -17,6 +18,7 @@ import javax.swing.table.DefaultTableModel;
  */
 public class PantallaPrincipal extends javax.swing.JFrame {
     private Gestor gestor= null;
+    private ComponenteTemporizador temporizador;
     /**
      * Creates new form PantallaPrincipal
      */
@@ -28,7 +30,7 @@ public class PantallaPrincipal extends javax.swing.JFrame {
         inicializarTablaCorredor();
         mostrarCarreras();
         mostrarCorredoresTotales();
-        //mostrarCorredores();
+        
     }
 
     /**
@@ -57,6 +59,9 @@ public class PantallaPrincipal extends javax.swing.JFrame {
         jMenuAlta = new javax.swing.JMenu();
         jMenuItemCarrera = new javax.swing.JMenuItem();
         jMenuItemCorredor = new javax.swing.JMenuItem();
+        jMenu1 = new javax.swing.JMenu();
+        jMenuItemCarrera1 = new javax.swing.JMenuItem();
+        jMenuItemCorredor1 = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -151,6 +156,26 @@ public class PantallaPrincipal extends javax.swing.JFrame {
 
         jMenuBar.add(jMenuAlta);
 
+        jMenu1.setText("Modificar");
+
+        jMenuItemCarrera1.setText("Carrera");
+        jMenuItemCarrera1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItemCarrera1ActionPerformed(evt);
+            }
+        });
+        jMenu1.add(jMenuItemCarrera1);
+
+        jMenuItemCorredor1.setText("Corredor");
+        jMenuItemCorredor1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItemCorredor1ActionPerformed(evt);
+            }
+        });
+        jMenu1.add(jMenuItemCorredor1);
+
+        jMenuBar.add(jMenu1);
+
         setJMenuBar(jMenuBar);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -236,12 +261,17 @@ public class PantallaPrincipal extends javax.swing.JFrame {
         if (fila!=-1) {
             String nombreCarrera = String.valueOf(jTableCarreras.getValueAt(fila, 0));
             mostrarCorredores(nombreCarrera);
-            System.out.println("Carrera"+nombreCarrera);
+            
         }
     }//GEN-LAST:event_jTableCarrerasMouseClicked
 
     private void jButtonBajaCarreraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonBajaCarreraActionPerformed
-        
+        int fila= jTableCarreras.getSelectedRow();
+        if (fila!=-1) {
+            String nombreCarrera = String.valueOf(jTableCarreras.getValueAt(fila, 0));
+            gestor.DarBajaCarrera(nombreCarrera);
+            mostrarCarreras();
+        }
     }//GEN-LAST:event_jButtonBajaCarreraActionPerformed
 
     private void jMenuItemCorredorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemCorredorActionPerformed
@@ -262,18 +292,34 @@ public class PantallaPrincipal extends javax.swing.JFrame {
          
         int filacorredor= jTableCorredoresTot.getSelectedRow();
         if (filacorredor!=-1) {
-            String dni = String.valueOf(jTableCorredoresTot.getValueAt(filacorredor, 0));
+            String dni = String.valueOf(jTableCorredoresTot.getValueAt(filacorredor, 4));
             if(correcto)
             {
                 gestor.AñadirCorredorCarrera(nombreCarrera, dni);
             }
         }
+        System.out.println("");
         mostrarCorredores(nombreCarrera);
     }//GEN-LAST:event_jButtonAñadirActionPerformed
 
     private void jButtonBajaCorredorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonBajaCorredorActionPerformed
         // TODO add your handling code here:
+        int fila= jTableCorredoresTot.getSelectedRow();
+        if (fila!=-1) {
+            String dni = String.valueOf(jTableCorredoresTot.getValueAt(fila, 4));
+            gestor.DarBajaCorredor(dni);
+            gestor.BorrarCorredorCarrera(dni);
+            mostrarCorredoresTotales();
+        }
     }//GEN-LAST:event_jButtonBajaCorredorActionPerformed
+
+    private void jMenuItemCarrera1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemCarrera1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jMenuItemCarrera1ActionPerformed
+
+    private void jMenuItemCorredor1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemCorredor1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jMenuItemCorredor1ActionPerformed
     
      private void inicializarTablaCarreras()
     {
@@ -283,6 +329,7 @@ public class PantallaPrincipal extends javax.swing.JFrame {
     }
     
      private void mostrarCarreras(){
+         inicializarTablaCarreras();
          ArrayList<Carrera> listaCarreras= gestor.getListaCarrera();
          DefaultTableModel dtm = (DefaultTableModel)jTableCarreras.getModel();
          for (int i = 0; i < listaCarreras.size(); i++) {
@@ -298,25 +345,30 @@ public class PantallaPrincipal extends javax.swing.JFrame {
     }
      
     private void mostrarCorredoresTotales(){
+        inicializarTablaCorredorTotales();
         ArrayList<Corredor> listaCorredores=gestor.getListaCorredor();
         DefaultTableModel dtm = (DefaultTableModel)jTableCorredoresTot.getModel();
         for (int i = 0; i < listaCorredores.size(); i++) {
-           dtm.addRow(listaCorredores.get(i).toArrayString());
+           dtm.addRow(listaCorredores.get(i).toArrayStringTotales());
         } 
     }
     
     private void inicializarTablaCorredor(){
         DefaultTableModel dtm = new DefaultTableModel();
-        dtm.setColumnIdentifiers(new String[]{"Nombre","Direccion","Fecha Nac","Telefono","DNI"});
+        dtm.setColumnIdentifiers(new String[]{"Dorsal","Nombre","Direccion","Fecha Nac","Telefono","DNI"});
         jTableCorredores.setModel(dtm);
     }
          
     private void mostrarCorredores(String nombreCarrera){
+        inicializarTablaCorredor();
         Carrera carrera = gestor.BuscarCarrera(nombreCarrera);
         ArrayList<Corredor> listaCorredores= carrera.getListaCorredores();
         DefaultTableModel dtm = (DefaultTableModel)jTableCorredores.getModel();
+        System.out.println("listaCorredores.size "+listaCorredores.size());
+        
         for (int i = 0; i < listaCorredores.size(); i++) {
-           dtm.addRow(listaCorredores.get(i).toArrayString());
+            dtm.addRow(listaCorredores.get(i).toArrayStringDorsal());
+           
         } 
     }
 
@@ -364,10 +416,13 @@ public class PantallaPrincipal extends javax.swing.JFrame {
     private javax.swing.JButton jButtonAñadir;
     private javax.swing.JButton jButtonBajaCarrera;
     private javax.swing.JButton jButtonBajaCorredor;
+    private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenuAlta;
     private javax.swing.JMenuBar jMenuBar;
     private javax.swing.JMenuItem jMenuItemCarrera;
+    private javax.swing.JMenuItem jMenuItemCarrera1;
     private javax.swing.JMenuItem jMenuItemCorredor;
+    private javax.swing.JMenuItem jMenuItemCorredor1;
     private javax.swing.JScrollPane jScrollPaneCarrera;
     private javax.swing.JScrollPane jScrollPaneCorredor;
     private javax.swing.JScrollPane jScrollPaneCorredorTot;

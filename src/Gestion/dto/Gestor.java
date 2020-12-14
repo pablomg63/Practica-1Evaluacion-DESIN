@@ -35,7 +35,7 @@ public class Gestor {
          listaCorredor.add(corredor);
     }
     
-    public void DarBajaCarrera(String nombre, Date fechaCarrera, String lugar, int numPart, int dorsal){
+    public void DarBajaCarrera(String nombre){
         for (int i = 0; i < listaCarrera.size(); i++) {
             if(listaCarrera.get(i).getNombre().equals(nombre)){
                 listaCarrera.remove(i);
@@ -52,6 +52,11 @@ public class Gestor {
             }else{
                 System.out.println("No existe dicho corredor");
             }
+        }
+    }
+    public void BorrarCorredorCarrera(String dni){
+        for (int i = 0; i < listaCarrera.size(); i++) {
+           listaCarrera.get(i).BorrarCorredor(dni);
         }
     }
     public Corredor BuscarCorredor(String dni){
@@ -82,5 +87,14 @@ public class Gestor {
         Carrera carrera = BuscarCarrera(nombreCarrera);
         Corredor corredor = BuscarCorredor(dni);
         carrera.AñadirCorredor(corredor);
+        
+        for (int i = 0; i < carrera.getListaCorredores().size(); i++) {
+          System.out.println(carrera.getListaCorredores().get(i).toArrayStringDorsal());
+        }
+    }
+    public void ModificarCorredor(String dni,String nuevaDireccion,String nuevoTelefono){
+        Corredor c= BuscarCorredor(dni);
+        c.setDireccion(nuevaDireccion);
+        c.setTelf(nuevoTelefono);
     }
 }

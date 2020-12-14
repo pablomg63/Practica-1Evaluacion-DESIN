@@ -17,6 +17,7 @@ public class Corredor {
     Date fechaNac;
     String direccion;
     String telf;
+    int dorsalCarrera;
 
     public Corredor(String nombre, String dni, Date fechaNac, String direccion, String telf) {
         this.nombre = nombre;
@@ -65,7 +66,27 @@ public class Corredor {
     public void setTelf(String telf) {
         this.telf = telf;
     }
-     public String[] toArrayString()
+
+    public int getDorsalCarrera() {
+        return dorsalCarrera;
+    }
+
+    public void setDorsalCarrera(int dorsalCarrera) {
+        this.dorsalCarrera = dorsalCarrera;
+    }
+    
+     public String[] toArrayStringDorsal()
+    {
+        String[] s = new String[6];
+        s[0] =dorsalCarrera+"";
+        s[1] = nombre;
+        s[2] = direccion;
+        s[3] = fechaNac.toString();
+        s[4] = telf;
+        s[5] = dni;
+        return s;
+    }
+    public String[] toArrayStringTotales()
     {
         String[] s = new String[5];
         s[0] = nombre;
