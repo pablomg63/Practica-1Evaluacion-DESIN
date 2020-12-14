@@ -21,6 +21,9 @@ public class JDialogCarrera extends javax.swing.JDialog {
         super(parent, modal);
         this.gestor=gestor;
         initComponents();
+        if(!gestor.getNombreCarreraModificar().equals("")){
+            jTextFieldNombre.setText(gestor.getNombreCarreraModificar());
+        }
     }
 
     /**
@@ -41,6 +44,7 @@ public class JDialogCarrera extends javax.swing.JDialog {
         jLabelFechaNac1 = new javax.swing.JLabel();
         jSpinnerParticipantes = new javax.swing.JSpinner();
         jButtonAlta = new javax.swing.JButton();
+        jButtonModificar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -60,6 +64,13 @@ public class JDialogCarrera extends javax.swing.JDialog {
         jButtonAlta.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButtonAltaActionPerformed(evt);
+            }
+        });
+
+        jButtonModificar.setText("Modificar");
+        jButtonModificar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonModificarActionPerformed(evt);
             }
         });
 
@@ -90,7 +101,8 @@ public class JDialogCarrera extends javax.swing.JDialog {
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addComponent(jSpinnerParticipantes, javax.swing.GroupLayout.PREFERRED_SIZE, 304, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(layout.createSequentialGroup()
-                                .addGap(0, 0, Short.MAX_VALUE)
+                                .addComponent(jButtonModificar)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addComponent(jButtonAlta)))))
                 .addContainerGap())
         );
@@ -113,8 +125,10 @@ public class JDialogCarrera extends javax.swing.JDialog {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabelFechaNac1)
                     .addComponent(jSpinnerParticipantes, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(58, 58, 58)
-                .addComponent(jButtonAlta)
+                .addGap(53, 53, 53)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jButtonAlta)
+                    .addComponent(jButtonModificar, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap())
         );
 
@@ -127,9 +141,19 @@ public class JDialogCarrera extends javax.swing.JDialog {
         String lugar = (String)jComboBoxLugar.getSelectedItem();
         int participantes= Integer.parseInt(jSpinnerParticipantes.getValue()+"");
         gestor.DarAltaCarrera(nombre, fechaCarrera, lugar, participantes, 0);
-        setVisible(false);
+        dispose();
         
     }//GEN-LAST:event_jButtonAltaActionPerformed
+
+    private void jButtonModificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonModificarActionPerformed
+        // TODO add your handling code here:
+        String nombre= jTextFieldNombre.getText();
+        Date fechaCarrera = (Date) jSpinnerFechaCarr.getValue();
+        String lugar = (String)jComboBoxLugar.getSelectedItem();
+        int participantes= Integer.parseInt(jSpinnerParticipantes.getValue()+"");
+        gestor.ModificarCarrera(nombre, lugar, fechaCarrera, participantes);
+        dispose();
+    }//GEN-LAST:event_jButtonModificarActionPerformed
 
     /**
      * @param args the command line arguments
@@ -137,6 +161,7 @@ public class JDialogCarrera extends javax.swing.JDialog {
    
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButtonAlta;
+    private javax.swing.JButton jButtonModificar;
     private javax.swing.JComboBox<String> jComboBoxLugar;
     private javax.swing.JLabel jLabelFechaCarr;
     private javax.swing.JLabel jLabelFechaNac1;

@@ -13,9 +13,27 @@ import java.util.Date;
  * @author PABLO
  */
 public class Gestor {
-    ArrayList<Carrera>listaCarrera= new ArrayList<>();
-    ArrayList<Corredor>listaCorredor=new ArrayList<>();
+    private ArrayList<Carrera>listaCarrera= new ArrayList<>();
+    private ArrayList<Corredor>listaCorredor=new ArrayList<>();
+    private String dniModificar ="";
+    private String nombreCarreraModificar ="";
 
+    public void setDniModificar(String dniModificar) {
+        this.dniModificar = dniModificar;
+    }
+
+    public void setNombreCarreraModificar(String nombreCarreraModificar) {
+        this.nombreCarreraModificar = nombreCarreraModificar;
+    }
+
+    public String getDniModificar() {
+        return dniModificar;
+    }
+
+    public String getNombreCarreraModificar() {
+        return nombreCarreraModificar;
+    }
+    
     public ArrayList<Carrera> getListaCarrera() {
         return listaCarrera;
     }
@@ -96,5 +114,11 @@ public class Gestor {
         Corredor c= BuscarCorredor(dni);
         c.setDireccion(nuevaDireccion);
         c.setTelf(nuevoTelefono);
+    }
+    public void ModificarCarrera(String nombre, String nuevoLugar, Date nuevaFecha, int nuevosParticipantes){
+        Carrera c= BuscarCarrera(nombre);
+        c.setLugar(nuevoLugar);
+        c.setFechaCarrera(nuevaFecha);
+        c.setNumPart(nuevosParticipantes);
     }
 }

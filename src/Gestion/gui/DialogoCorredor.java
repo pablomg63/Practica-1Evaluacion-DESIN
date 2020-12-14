@@ -22,6 +22,9 @@ public class DialogoCorredor extends javax.swing.JDialog {
         super(parent, modal);
         this.gestor=gestor;
         initComponents();
+        if(!gestor.getDniModificar().equals("")){
+            jTextFieldDNI.setText(gestor.getDniModificar());
+        }
     }
 
     /**
@@ -149,11 +152,16 @@ public class DialogoCorredor extends javax.swing.JDialog {
         String telefono= jTextFieldTelefono.getText();
         String dni = jTextFieldDNI.getText();
         gestor.DarAltaCorredor(nombre, dni, fechaNac, direccion, telefono);
-        setVisible(false);
+        dispose();
     }//GEN-LAST:event_jButtonAltaActionPerformed
 
     private void jButtonModificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonModificarActionPerformed
         // TODO add your handling code here:
+        String direccion= jTextFieldDireccion.getText();
+        String telefono= jTextFieldTelefono.getText();
+        String dni = jTextFieldDNI.getText();
+        gestor.ModificarCorredor(dni, direccion, telefono);
+        dispose();
     }//GEN-LAST:event_jButtonModificarActionPerformed
 
     /**

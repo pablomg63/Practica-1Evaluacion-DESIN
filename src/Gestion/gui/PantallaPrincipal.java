@@ -19,6 +19,7 @@ import javax.swing.table.DefaultTableModel;
 public class PantallaPrincipal extends javax.swing.JFrame {
     private Gestor gestor= null;
     private ComponenteTemporizador temporizador;
+    
     /**
      * Creates new form PantallaPrincipal
      */
@@ -30,6 +31,7 @@ public class PantallaPrincipal extends javax.swing.JFrame {
         inicializarTablaCorredor();
         mostrarCarreras();
         mostrarCorredoresTotales();
+        
         
     }
 
@@ -59,9 +61,9 @@ public class PantallaPrincipal extends javax.swing.JFrame {
         jMenuAlta = new javax.swing.JMenu();
         jMenuItemCarrera = new javax.swing.JMenuItem();
         jMenuItemCorredor = new javax.swing.JMenuItem();
-        jMenu1 = new javax.swing.JMenu();
-        jMenuItemCarrera1 = new javax.swing.JMenuItem();
-        jMenuItemCorredor1 = new javax.swing.JMenuItem();
+        jMenumodificar = new javax.swing.JMenu();
+        jMenuItemCarreraModificar = new javax.swing.JMenuItem();
+        jMenuItemCorredorModificar = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -156,25 +158,25 @@ public class PantallaPrincipal extends javax.swing.JFrame {
 
         jMenuBar.add(jMenuAlta);
 
-        jMenu1.setText("Modificar");
+        jMenumodificar.setText("Modificar");
 
-        jMenuItemCarrera1.setText("Carrera");
-        jMenuItemCarrera1.addActionListener(new java.awt.event.ActionListener() {
+        jMenuItemCarreraModificar.setText("Carrera");
+        jMenuItemCarreraModificar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItemCarrera1ActionPerformed(evt);
+                jMenuItemCarreraModificarActionPerformed(evt);
             }
         });
-        jMenu1.add(jMenuItemCarrera1);
+        jMenumodificar.add(jMenuItemCarreraModificar);
 
-        jMenuItemCorredor1.setText("Corredor");
-        jMenuItemCorredor1.addActionListener(new java.awt.event.ActionListener() {
+        jMenuItemCorredorModificar.setText("Corredor");
+        jMenuItemCorredorModificar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItemCorredor1ActionPerformed(evt);
+                jMenuItemCorredorModificarActionPerformed(evt);
             }
         });
-        jMenu1.add(jMenuItemCorredor1);
+        jMenumodificar.add(jMenuItemCorredorModificar);
 
-        jMenuBar.add(jMenu1);
+        jMenuBar.add(jMenumodificar);
 
         setJMenuBar(jMenuBar);
 
@@ -201,9 +203,7 @@ public class PantallaPrincipal extends javax.swing.JFrame {
                                             .addComponent(filler1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                             .addComponent(jButtonBajaCarrera))))
                                 .addGap(0, 0, Short.MAX_VALUE))
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(TituloCorredor)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))))
+                            .addComponent(TituloCorredor))))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 28, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
@@ -313,13 +313,33 @@ public class PantallaPrincipal extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_jButtonBajaCorredorActionPerformed
 
-    private void jMenuItemCarrera1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemCarrera1ActionPerformed
+    private void jMenuItemCarreraModificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemCarreraModificarActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jMenuItemCarrera1ActionPerformed
+         int fila= jTableCorredoresTot.getSelectedRow();
+        if(fila!=-1){
+            String nombreCarrera= String.valueOf(jTableCarreras.getValueAt(fila, 0));
+            gestor.setNombreCarreraModificar(nombreCarrera);
+            JDialogCarrera carrera= new JDialogCarrera(this, true, gestor);
+            carrera.setVisible(true);
+            mostrarCarreras();
+            gestor.setNombreCarreraModificar("");      
+        }
+        
+    }//GEN-LAST:event_jMenuItemCarreraModificarActionPerformed
 
-    private void jMenuItemCorredor1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemCorredor1ActionPerformed
+    private void jMenuItemCorredorModificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemCorredorModificarActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jMenuItemCorredor1ActionPerformed
+        int fila = jTableCorredoresTot.getSelectedRow();
+        if(fila!=-1){
+            String dni= String.valueOf(jTableCorredoresTot.getValueAt(fila, 4));
+            gestor.setDniModificar(dni);
+            DialogoCorredor corredor= new DialogoCorredor(this, true, gestor);
+            corredor.setVisible(true);
+            mostrarCorredoresTotales();   
+            gestor.setDniModificar("");
+        }
+        
+    }//GEN-LAST:event_jMenuItemCorredorModificarActionPerformed
     
      private void inicializarTablaCarreras()
     {
@@ -416,13 +436,13 @@ public class PantallaPrincipal extends javax.swing.JFrame {
     private javax.swing.JButton jButtonAñadir;
     private javax.swing.JButton jButtonBajaCarrera;
     private javax.swing.JButton jButtonBajaCorredor;
-    private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenuAlta;
     private javax.swing.JMenuBar jMenuBar;
     private javax.swing.JMenuItem jMenuItemCarrera;
-    private javax.swing.JMenuItem jMenuItemCarrera1;
+    private javax.swing.JMenuItem jMenuItemCarreraModificar;
     private javax.swing.JMenuItem jMenuItemCorredor;
-    private javax.swing.JMenuItem jMenuItemCorredor1;
+    private javax.swing.JMenuItem jMenuItemCorredorModificar;
+    private javax.swing.JMenu jMenumodificar;
     private javax.swing.JScrollPane jScrollPaneCarrera;
     private javax.swing.JScrollPane jScrollPaneCorredor;
     private javax.swing.JScrollPane jScrollPaneCorredorTot;
